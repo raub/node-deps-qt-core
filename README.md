@@ -1,2 +1,2 @@
 # node-deps-qt-core
-Qt Core binaries.
+Common binary dependencies for qt-dependent runtime
