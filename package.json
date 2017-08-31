@@ -1,8 +1,8 @@
 {
 	"name": "node-deps-qt-core-raub",
 	"author": "Luis Blanco <raubtierxxx@gmail.com>",
-	"description": "Common dependencies for qt-core-dependent compilation. +Binaries.",
-	"version": "0.2.1",
+	"description": "Common binary dependencies for qt-core-dependent modules.",
+	"version": "5.9.1",
 	"main": "index.js",
 	"keywords": [
 		"qt",
