@@ -30,6 +30,6 @@
 		"url": "https://github.com/node-3d/deps-qt-core-raub.git"
 	},
 	"dependencies": {
-		"addon-tools-raub": "0.0.8"
+		"addon-tools-raub": "0.1.8"
 	}
 }
