@@ -10,7 +10,7 @@
 		"qt-core",
 		"core",
 		"minimal",
-		"qt",
+		"qt"
 	],
 	"engines": {
 		"node": ">=8.11.1",
