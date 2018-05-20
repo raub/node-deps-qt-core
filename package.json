@@ -1,7 +1,7 @@
 {
 	"author": "Luis Blanco <luisblanco1337@gmail.com>",
 	"name": "deps-qt-core-raub",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "Qt Core dynamic libraries for dependent Node.js addons",
 	"license": "MIT",
 	"main": "index.js",
@@ -28,6 +28,6 @@
 		"url": "https://github.com/node-3d/deps-qt-core-raub.git"
 	},
 	"dependencies": {
-		"addon-tools-raub": "0.1.8"
+		"addon-tools-raub": "^2.0.1"
 	}
 }
