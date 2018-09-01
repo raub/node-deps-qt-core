@@ -13,7 +13,7 @@
 		"qt"
 	],
 	"engines": {
-		"node": ">=8.11.1",
+		"node": ">=8.11.4",
 		"npm": ">=5.6.0"
 	},
 	"maintainers": [
@@ -28,6 +28,6 @@
 		"url": "https://github.com/node-3d/deps-qt-core-raub.git"
 	},
 	"dependencies": {
-		"addon-tools-raub": "^2.0.1"
+		"addon-tools-raub": "4.0.0"
 	}
 }
