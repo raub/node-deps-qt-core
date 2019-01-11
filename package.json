@@ -10,11 +10,23 @@
 		"qt-core",
 		"core",
 		"minimal",
-		"qt"
+		"qt",
+		"binary",
+		"library",
+		"dll",
+		"headers",
+		"lib",
+		"dylib",
+		"so",
+		"c++",
+		"addon",
+		"bindings",
+		"native",
+		"gyp"
 	],
 	"engines": {
-		"node": ">=8.11.4",
-		"npm": ">=6.3.0"
+		"node": ">=10.13.0",
+		"npm": ">=6.4.1"
 	},
 	"maintainers": [
 		{
@@ -28,6 +40,6 @@
 		"url": "https://github.com/node-3d/deps-qt-core-raub.git"
 	},
 	"dependencies": {
-		"addon-tools-raub": "4.0.0"
+		"addon-tools-raub": "4.1.0"
 	}
 }
