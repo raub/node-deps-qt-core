@@ -22,17 +22,18 @@ binaries through **NPM** for **Node.js** addons.
 
 ## Usage
 
-
-### JS
+### Windows
 
 Before any import of Qt-dependent module, there should be `require('deps-qt-core-raub')`.
 On Windows it adds Qt's DLL location to ENV PATH. On Unix it does nothing.
 
 
-### binding.gyp
+### Unix
 
 On Unix, **special** runtime library directories are not in ENV PATH. The paths
 to such directories have to be compiled into the node-addon with `rpath` option.
+
+Adjust `binding.gyp`:
 
 ```javascript
 	'variables': {
@@ -44,11 +45,70 @@ to such directories have to be compiled into the node-addon with `rpath` option.
 			'target_name': '...',
 			
 			'conditions': [
-				['OS=="linux" or OS=="mac"', {
-					'libraries': ['-Wl,-rpath,<(qt_core_bin)'],
-				}],
+				[
+					'OS=="linux" or OS=="mac"', {
+						'libraries': [
+							'-Wl,-rpath <(qt_core_bin)',
+						],
+					}
+				],
+				[
+					'OS=="linux"', {
+						'libraries': [
+							'<(qt_core_bin)/libicui18n.so.56',
+							'<(qt_core_bin)/libicuuc.so.56',
+							'<(qt_core_bin)/libicudata.so.56',
+							'<(qt_core_bin)/libicuio.so.56',
+							'<(qt_core_bin)/libicule.so.56',
+							'<(qt_core_bin)/libicutu.so.56',
+							'<(qt_core_bin)/libQt5Core.so.5',
+							'<(qt_core_bin)/libQt5Network.so.5',
+							'<(qt_core_bin)/libQt5DBus.so.5',
+						],
+					}
+				],
+				[
+					'OS=="mac"', {
+						'libraries': [
+							'<(qt_core_bin)/Qt5Core',
+							'<(qt_core_bin)/Qt5Network',
+							'<(qt_core_bin)/Qt5DBus',
+						],
+					}
+				],
 			],
 		},
+```
+
+
+Preload libraries:
+
+```cpp
+#ifndef WIN32
+	#include <dlfcn.h>
+#endif
+
+	// ... inside some kind of init() function
+	#ifndef WIN32
+	dlopen("libicui18n.so.56", RTLD_LAZY);
+	dlopen("libicuuc.so.56", RTLD_LAZY);
+	dlopen("libicudata.so.56", RTLD_LAZY);
+	dlopen("libicuio.so.56", RTLD_LAZY);
+	dlopen("libicule.so.56", RTLD_LAZY);
+	dlopen("libicutu.so.56", RTLD_LAZY);
+	dlopen("libQt5Core.so.5", RTLD_LAZY);
+	dlopen("libQt5Network.so.5", RTLD_LAZY);
+	dlopen("libQt5DBus.so.5", RTLD_LAZY);
+	dlopen("libQt5Gui.so.5", RTLD_LAZY);
+	dlopen("libQt5OpenGL.so.5", RTLD_LAZY);
+	dlopen("libQt5Widgets.so.5", RTLD_LAZY);
+	dlopen("libQt5XcbQpa.so.5", RTLD_LAZY);
+	dlopen("libQt5Qml.so.5", RTLD_LAZY);
+	dlopen("libQt5Quick.so.5", RTLD_LAZY);
+	dlopen("libQt5QuickControls2.so.5", RTLD_LAZY);
+	dlopen("libQt5QuickTemplates2.so.5", RTLD_LAZY);
+	dlopen("libQt5QuickWidgets.so.5", RTLD_LAZY);
+	#endif
 ```
 
 
