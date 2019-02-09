@@ -89,7 +89,7 @@ Preload libraries:
 #endif
 
 	// ... inside some kind of init() function
-	#ifndef WIN32
+	#ifdef __linux__
 	dlopen("libicui18n.so.56", RTLD_LAZY);
 	dlopen("libicuuc.so.56", RTLD_LAZY);
 	dlopen("libicudata.so.56", RTLD_LAZY);
@@ -99,15 +99,10 @@ Preload libraries:
 	dlopen("libQt5Core.so.5", RTLD_LAZY);
 	dlopen("libQt5Network.so.5", RTLD_LAZY);
 	dlopen("libQt5DBus.so.5", RTLD_LAZY);
-	dlopen("libQt5Gui.so.5", RTLD_LAZY);
-	dlopen("libQt5OpenGL.so.5", RTLD_LAZY);
-	dlopen("libQt5Widgets.so.5", RTLD_LAZY);
-	dlopen("libQt5XcbQpa.so.5", RTLD_LAZY);
-	dlopen("libQt5Qml.so.5", RTLD_LAZY);
-	dlopen("libQt5Quick.so.5", RTLD_LAZY);
-	dlopen("libQt5QuickControls2.so.5", RTLD_LAZY);
-	dlopen("libQt5QuickTemplates2.so.5", RTLD_LAZY);
-	dlopen("libQt5QuickWidgets.so.5", RTLD_LAZY);
+	#elif __APPLE__
+	dlopen("QtCore", RTLD_LAZY);
+	dlopen("QtNetwork", RTLD_LAZY);
+	dlopen("QtDBus", RTLD_LAZY);
 	#endif
 ```
 
