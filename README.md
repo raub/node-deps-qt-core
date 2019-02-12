@@ -67,15 +67,6 @@ Adjust `binding.gyp`:
 						],
 					}
 				],
-				[
-					'OS=="mac"', {
-						'libraries': [
-							'<(qt_core_bin)/QtCore',
-							'<(qt_core_bin)/QtNetwork',
-							'<(qt_core_bin)/QtDBus',
-						],
-					}
-				],
 			],
 		},
 ```
