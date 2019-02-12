@@ -90,10 +90,6 @@ Preload libraries:
 	dlopen("libQt5Core.so.5", RTLD_LAZY);
 	dlopen("libQt5Network.so.5", RTLD_LAZY);
 	dlopen("libQt5DBus.so.5", RTLD_LAZY);
-	#elif __APPLE__
-	dlopen("QtCore", RTLD_LAZY);
-	dlopen("QtNetwork", RTLD_LAZY);
-	dlopen("QtDBus", RTLD_LAZY);
 	#endif
 ```
 
