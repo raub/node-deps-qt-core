@@ -12,10 +12,10 @@ This is a part of [Node3D](https://github.com/node-3d) project.
 
 ## Synopsis
 
-This dependency package is distributing **Qt Core 5.11.1**
+This dependency package is distributing **Qt Core 5.13.0**
 binaries through **NPM** for **Node.js** addons.
 
-* Platforms: win x32/x64, linux x64, mac x64.
+* Platforms (x64): Windows, Linux, OSX.
 * Library: Qt.
 * Linking: dynamic dll-type.
 
@@ -37,7 +37,8 @@ Adjust `binding.gyp`:
 
 ```javascript
 	'variables': {
-		'qt_core_bin' : '<!(node -e "require(\'deps-qt-core-raub\').bin()")',
+		'bin'         : '<!(node -p "require(\'addon-tools-raub\').bin")',
+		'qt_core_bin' : '<!(node -p "require(\'deps-qt-core-raub\').bin")',
 	},
 	...
 	'targets': [
@@ -45,28 +46,32 @@ Adjust `binding.gyp`:
 			'target_name': '...',
 			
 			'conditions': [
-				[
-					'OS=="linux" or OS=="mac"', {
-						'libraries': [
-							'-Wl,-rpath,<(qt_core_bin)',
-						],
-					}
-				],
-				[
-					'OS=="linux"', {
-						'libraries': [
-							'<(qt_core_bin)/libicui18n.so.56',
-							'<(qt_core_bin)/libicuuc.so.56',
-							'<(qt_core_bin)/libicudata.so.56',
-							'<(qt_core_bin)/libicuio.so.56',
-							'<(qt_core_bin)/libicule.so.56',
-							'<(qt_core_bin)/libicutu.so.56',
-							'<(qt_core_bin)/libQt5Core.so.5',
-							'<(qt_core_bin)/libQt5Network.so.5',
-							'<(qt_core_bin)/libQt5DBus.so.5',
-						],
-					}
-				],
+				
+				['OS=="linux"', {
+					'libraries': [
+						"-Wl,-rpath,'$$ORIGIN'",
+						"-Wl,-rpath,'$$ORIGIN/../node_modules/deps-qt-core-raub/<(bin)'",
+						"-Wl,-rpath,'$$ORIGIN/../../deps-qt-core-raub/<(bin)'",
+						'<(qt_core_bin)/libicui18n.so.56',
+						'<(qt_core_bin)/libicuuc.so.56',
+						'<(qt_core_bin)/libicudata.so.56',
+						'<(qt_core_bin)/libicuio.so.56',
+						'<(qt_core_bin)/libicule.so.56',
+						'<(qt_core_bin)/libicutu.so.56',
+						'<(qt_core_bin)/libQt5Core.so.5',
+						'<(qt_core_bin)/libQt5Network.so.5',
+						'<(qt_core_bin)/libQt5DBus.so.5',
+					],
+				}],
+				
+				['OS=="mac"', {
+					'libraries': [
+						'-Wl,-rpath,@loader_path',
+						'-Wl,-rpath,@loader_path/../node_modules/deps-qt-core-raub/<(bin)',
+						'-Wl,-rpath,@loader_path/../../deps-qt-core-raub/<(bin)',
+					],
+				}],
+				
 			],
 		},
 ```
@@ -78,7 +83,7 @@ Preload libraries:
 #ifndef WIN32
 	#include <dlfcn.h>
 #endif
-
+	
 	// ... inside some kind of init() function
 	#ifdef __linux__
 	dlopen("libicui18n.so.56", RTLD_LAZY);

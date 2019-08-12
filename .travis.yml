@@ -1,19 +1,20 @@
 language: node_js
-node_js: "10.13.0"
-
-
-matrix:
-  include:
-  - name: "Linux"
-    os: linux
-    dist: xenial
-    sudo: false
-  - name: "OSX"
-    os: osx
-  - name: "Windows"
-    os: windows
-
+node_js: "10.16.1"
 
 install:
   - cd test
   - npm i
+
+
+matrix:
+  include:
+  - name: "Linux Test"
+    os: linux
+    dist: xenial
+    sudo: false
+  - name: "OSX Test"
+    os: osx
+  - name: "Windows Test"
+    os: windows
+
+
