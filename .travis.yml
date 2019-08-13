@@ -3,7 +3,7 @@ node_js: "10.16.1"
 
 install:
   - cd test
-  - npm i
+  - npm ci
 
 
 matrix:
