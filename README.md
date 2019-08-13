@@ -103,7 +103,7 @@ Preload libraries:
 
 This software uses the [Qt library](https://www.qt.io/).
 Qt is legally used under the LGPLv3 (GNU Lesser General Public License) version.
-It is [explicitly stated](https://doc.qt.io/qt-5.10/licensing.html) that Qt can be used commercially under LGPLv3:
+It is [explicitly stated](https://doc.qt.io/qt-5.13/licensing.html) that Qt can be used commercially under LGPLv3:
 
 > Qt licensed under the GNU Lesser General Public License (LGPL) version 3 is
 appropriate for the development of Qt applications provided you can comply
